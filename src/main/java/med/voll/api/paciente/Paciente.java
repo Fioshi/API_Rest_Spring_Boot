@@ -5,9 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import med.voll.api.domain.endereco.Endereco;
+import med.voll.api.endereco.Endereco;
 
-@Table(name = "pacientes")
+@Table(name = "tb_pacientes")
 @Entity(name = "Paciente")
 @Getter
 @NoArgsConstructor
@@ -15,7 +15,8 @@ import med.voll.api.domain.endereco.Endereco;
 @EqualsAndHashCode(of = "id")
 public class Paciente {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String email;
@@ -28,6 +29,7 @@ public class Paciente {
     private Endereco endereco;
 
     private Boolean ativo;
+
 
     public Paciente(DadosCadastroPaciente dados) {
         this.ativo = true;
@@ -48,10 +50,9 @@ public class Paciente {
         if (dados.endereco() != null) {
             this.endereco.atualizarInformacoes(dados.endereco());
         }
-
     }
 
-    public void excluir() {
+    public void excluir(){
         this.ativo = false;
     }
 }
